@@ -2,7 +2,7 @@
 title: Group Anagrams
 category: AlgoSIG 1
 link: https://leetcode.com/problems/group-anagrams/
-author: 
+author: Vukasin Koprivica
 gh_comments_issue_id: 115
 tags:
   - strings
@@ -27,5 +27,24 @@ strs = ["eat","tea","tan","ate","nat","bat"] # Input
 ## Solution
 
 ```python
-    # INSERT CODE HERE
+hash_values = dict()
+results_dict = dict()
+
+# Create the dictionary which each key is word and values is hash of the same word
+for word in strs:
+    hash_value = 0
+    for letter in word:
+        hash_value += hash(letter)
+    hash_values[word] = hash_value
+
+    # Create dictionary which keys are hash values and values are dictionary
+    # with the words that have same hash_values
+    if hash_value in results_dict:
+        results_dict[hash_value].append(word)
+    else:
+        results_dict[hash_value] = [word]
+
+# Return output in as a list
+results = [v for v in results_dict.values()]
+return results
 ```
